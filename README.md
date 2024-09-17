@@ -1,70 +1,90 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Flower Count Application
 
-## Available Scripts
+### Overview
 
-In the project directory, you can run:
+The Flower Count Application is a full-stack solution designed to handle image uploads, process these images to count flowers, and display the results. It consists of two main components:
 
-### `npm start`
+1. **Frontend**: A React-based user interface where users can upload images and view flower count results.
+2. **Backend**: An Express-based server that handles file uploads, processes the images, and provides endpoints for user authentication and image retrieval.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frontend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Technologies Used**: React, Axios, CSS
 
-### `npm test`
+#### Key Components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **FileUpload Component**
+   - Allows users to select and upload multiple images.
+   - Handles file input and uploads files to the backend server using Axios.
 
-### `npm run build`
+2. **ImageList Component**
+   - Displays the uploaded images along with the flower count results returned from the backend.
+   - Renders a list of images with their corresponding flower counts.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **App Component**
+   - Main component that integrates `FileUpload` and `ImageList`.
+   - Manages state for storing image data and handles image upload requests.
+   - Calls the backend API to process images and updates the UI with the results.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### CSS Styling
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **General Layout**: Provides a clean, centered layout with a modern look using the Poppins font.
+- **File Upload Button**: Styled to be prominent and user-friendly.
+- **Image List**: Ensures images and results are displayed neatly.
 
-### `npm run eject`
+### Backend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Technologies Used**: Node.js, Express, Multer, JWT, Bcrypt
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Key Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. **File Upload Handling**
+   - Uses Multer to manage file uploads.
+   - Saves uploaded images to a directory named `flower_test_images`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. **Image Processing**
+   - Simulates flower counting for demo purposes. 
+   - Returns a mock count of flowers detected in each uploaded image.
 
-## Learn More
+3. **User Authentication**
+   - Provides a login endpoint for users to authenticate and receive a JWT token.
+   - Uses JWT for securing access to certain API endpoints.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. **Static File Serving**
+   - Serves uploaded images so that they can be displayed in the frontend.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### API Endpoints
 
-### Code Splitting
+- **`POST /login`**: Authenticates a user and provides a JWT token.
+- **`POST /process-images`**: Accepts image uploads, processes them, and returns flower count results.
+- **`GET /flower_test_images`**: Lists uploaded images (requires JWT authentication).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### How It Works
 
-### Analyzing the Bundle Size
+1. **User Interaction**:
+   - On the frontend, users select images using the `FileUpload` component.
+   - These images are then uploaded to the backend server.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. **Backend Processing**:
+   - The backend receives the images and saves them using Multer.
+   - The `process-images` endpoint simulates flower counting and returns the results.
 
-### Making a Progressive Web App
+3. **Displaying Results**:
+   - The frontend receives the results and updates the `ImageList` component.
+   - Users can view the images along with the flower count data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Setup Instructions
 
-### Advanced Configuration
+#### Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Install dependencies using `npm install`.
+2. Set up environment variables in `.env`.
+3. Start the frontend application using `npm start`.
 
-### Deployment
+#### Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Install dependencies using `npm install`.
+2. Create a `.env` file with necessary environment variables (`JWT_SECRET`, `API_KEY`, `PORT`).
+3. Start the backend server using `npm start`.
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
