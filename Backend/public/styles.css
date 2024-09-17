@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+#uploadButton {
+    display: block;
+    margin: 10px auto;
+}
