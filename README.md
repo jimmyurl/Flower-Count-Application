@@ -88,7 +88,7 @@ The Flower Count Application is a full-stack solution designed to handle image u
 2. Create a `.env` file with necessary environment variables (`JWT_SECRET`, `API_KEY`, `PORT`).
 3. Start the backend server using `npm start`.
 
-![Alt text](https://github.com/jimmyurl/Flower-Count-Application/blob/main/flower%20counter.JPG)
+![Alt text]([![Description](https://raw.githubusercontent.com/jimmyurl/Flower-Count-Application/master/frontend.png)](https://github.com/jimmyurl/Flower-Count-Application))
 
 ![Alt text](https://github.com/jimmyurl/Flower-Count-Application/blob/main/post2.JPG)
 
