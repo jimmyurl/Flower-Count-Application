@@ -44,7 +44,7 @@ The Flower Count Application is a full-stack solution designed to handle image u
    - Saves uploaded images to a directory named `flower_test_images`.
 
 2. **Image Processing**
-   - Simulates flower counting for demo purposes. 
+   - Integrates with external AI models (Hugging Face) to analyze uploaded images and return computed results. 
    - Returns a mock count of flowers detected in each uploaded image.
 
 3. **User Authentication**
