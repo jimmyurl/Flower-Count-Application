@@ -1,95 +1,292 @@
-/*USE THIS CSS TO STYLE YOUR FRONTEND */
+/* ============================================
+   Flower Count App — Botanical Design System
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
 :root {
-  --primary-color: #0964b0;
+  --primary:        #2d6a4f;
+  --primary-light:  #52b788;
+  --primary-pale:   #d8f3dc;
+  --accent:         #f4a261;
+  --text-dark:      #1b2e22;
+  --text-mid:       #4a6358;
+  --text-light:     #8aab96;
+  --surface:        #ffffff;
+  --surface-raised: #f7fdf9;
+  --border:         #c8e6d0;
+  --shadow-sm:      0 1px 3px rgba(45, 106, 79, 0.08);
+  --shadow-md:      0 4px 16px rgba(45, 106, 79, 0.12);
+  --shadow-lg:      0 12px 40px rgba(45, 106, 79, 0.18);
+  --radius-sm:      8px;
+  --radius-md:      14px;
+  --radius-lg:      24px;
+  --transition:     200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: #1f3244;
+  font-family: 'DM Sans', sans-serif;
+  background-color: #eef7f0;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(82, 183, 136, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(244, 162, 97, 0.10) 0%, transparent 60%);
   min-height: 100vh;
-  max-width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5vmax;
-  box-sizing: border-box;
+  padding: clamp(24px, 5vw, 64px);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
 }
 
-div {
-  background-color: #efefef;
-  padding: 32px;
-  border-radius: 20px;
+/* ── Container / Card ── */
+.container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(28px, 5vw, 52px);
+  width: 100%;
+  max-width: 640px;
+  animation: card-rise 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+/* ── Headings ── */
+h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-light), var(--accent));
+  border-radius: 2px;
+  margin-top: 12px;
+}
+
+/* Sub-label under heading */
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 6px;
+  margin-bottom: 32px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+/* ── File Upload Section ── */
+.upload-section {
+  background: var(--surface-raised);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  margin-bottom: 24px;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.upload-section:hover,
+.upload-section:focus-within {
+  border-color: var(--primary-light);
+  background: #f0faf4;
+}
+
+/* ── File Input ── */
 input[type="file"] {
-  padding: 4px;
-  margin: -4px;
-  position: relative;
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  cursor: pointer;
   outline: none;
+  position: relative;
 
-  /* File Selector Button Styles */
   &::file-selector-button {
-    border-radius: 4px;
-    padding: 0 16px;
-    height: 40px;
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0 18px;
+    height: 38px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
     cursor: pointer;
-    background-color: white;
-    border: 1px solid rgba(#000, 0.16);
-    box-shadow: 0px 1px 0px rgba(#000, 0.05);
-    margin-right: 16px;
+    margin-right: 14px;
+    transition: background var(--transition), transform var(--transition);
 
-    /*
-      This is a hack to change the button label. 
-      I'm hiding the default label and then 
-      manually applying the width based on 
-      updated icon and label.
-    */
-    width: 132px;
-    color: transparent;
-    
-    /*
-      Firefox doesn't support the pseudo ::before 
-      or ::after elements on this input field so 
-      we need to use the @supports rule to enable 
-      default styles fallback for Firefox.
-    */
     @supports (-moz-appearance: none) {
-      color: var(--primary-color);
+      background: var(--primary);
+      color: white;
     }
 
     &:hover {
-      background-color: #f3f4f6;
+      background: var(--primary-light);
     }
 
     &:active {
-      background-color: #e5e7eb;
+      transform: scale(0.97);
     }
   }
 
-  /* Faked label styles and icon */
-  &::before {
-    position: absolute;
-    pointer-events: none;
-    top: 14px;
-    left: 16px;
-    height: 20px;
-    width: 20px;
-    content: "";
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
-  }
-  
-  &::after {
-    position: absolute;
-    pointer-events: none;
-    top: 16px;
-    left: 40px;
-    color: var(--primary-color);
-    content: "Upload File";
-  }
-
-  /* Handle Component Focus */
   &:focus-within::file-selector-button,
   &:focus::file-selector-button {
-    outline: 2px solid var(--primary-color);
+    outline: 3px solid var(--primary-pale);
     outline-offset: 2px;
+  }
+}
+
+/* ── Upload Button ── */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 0 28px;
+  height: 46px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.30);
+  transition:
+    transform  var(--transition),
+    box-shadow var(--transition),
+    opacity    var(--transition);
+  width: 100%;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(45, 106, 79, 0.35);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Results List ── */
+.image-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.image-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  animation: row-in 0.3s ease both;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.image-item:hover {
+  background: #f0faf4;
+  border-color: var(--primary-light);
+}
+
+@keyframes row-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+.image-item .filename {
+  font-weight: 500;
+  color: var(--text-dark);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 70%;
+}
+
+.image-item .count-badge {
+  background: var(--primary-pale);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 3px 12px;
+  border-radius: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Empty / Loading States ── */
+.state-empty {
+  text-align: center;
+  padding: 32px 0;
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.state-empty svg {
+  display: block;
+  margin: 0 auto 12px;
+  opacity: 0.35;
+}
+
+/* ── Error Message ── */
+.error-msg {
+  background: #fff5f5;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  margin-top: 16px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .container {
+    border-radius: var(--radius-md);
+    padding: 24px 20px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
   }
 }
